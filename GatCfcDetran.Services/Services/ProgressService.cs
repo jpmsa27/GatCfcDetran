@@ -1,0 +1,13 @@
+﻿using GatCfcDetran.Services.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GatCfcDetran.Services.Services
+{
+    public class ProgressService : IProgressService
+    {
+    }
+}

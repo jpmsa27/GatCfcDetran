@@ -1,0 +1,314 @@
+{
+	"info": {
+		"_postman_id": "29f8c6fd-96ca-4aa5-b8f0-09bccbdd70a4",
+		"name": "GatCfcDetran",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10625550"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Auth",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"joao.silva@email.com\",\r\n  \"password\": \"123mudar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Auths",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Auths"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cfcs",
+			"item": [
+				{
+					"name": "CreateCfc",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"string\",\r\n  \"cnpj\": \"string\",\r\n  \"address\": \"string\",\r\n  \"email\": \"string\",\r\n  \"cpf\": \"string\",\r\n  \"password\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Cfcs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Cfcs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCfc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Cfcs/{{cnpj}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Cfcs",
+								"{{cnpj}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJjZmNJZCI6ImU3M2M5ZjQzLTZjNWQtNGI1Mi04NTk0LTJkMmZmMmFiZjFiNyIsInJvbGUiOiJTVVBFUiIsImV4cCI6MTc0NTgzMzY2Mn0.urAMENQcz13exO-bDtzKPtuHeKPoqBSc5fkOQni9fjs",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Schedules",
+			"item": [
+				{
+					"name": "CreateSchedule",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cpf\": \"string\",\r\n  \"scheduleDate\": \"2025-04-28T03:17:44.713Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Schedules",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Schedules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSchedules",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7163/api/Schedules",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7163",
+							"path": [
+								"api",
+								"Schedules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserSchedules",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7163/api/Schedules",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7163",
+							"path": [
+								"api",
+								"Schedules"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nelsinho\",\r\n  \"cpf\": \"21217101080\",\r\n  \"password\": \"123mudar\",\r\n  \"birthDate\": \"1998-05-12T03:21:42.302Z\",\r\n  \"email\": \"nelsinho@admin.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nelsinho\",\r\n  \"cpf\": \"21217101080\",\r\n  \"password\": \"123mudar\",\r\n  \"birthDate\": \"1998-05-12T03:21:42.302Z\",\r\n  \"email\": \"nelsinho@admin.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Users/{{cpf}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Users",
+								"{{cpf}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJjZmNJZCI6ImU3M2M5ZjQzLTZjNWQtNGI1Mi04NTk0LTJkMmZmMmFiZjFiNyIsInVzZXJJZCI6IjhiN2I4ZDdjLTRmNzctNGMwMS05YzdlLTZkMmI3MGI2NmE3MCIsInJvbGUiOiJTVVBFUiIsImV4cCI6MTc0NTgzNzM0Nn0.GFJJmO5V_FcUuUNvcYuYoheJ1pkNEruVRAoQ0g22Gd0",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

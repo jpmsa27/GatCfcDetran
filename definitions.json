@@ -1,0 +1,54 @@
+{
+    "users": [
+      {
+        "name": "admin",
+        "password": "admin",
+        "tags": "administrator"
+      }
+    ],
+    "vhosts": [
+      {
+        "name": "/"
+      }
+    ],
+    "permissions": [
+      {
+        "user": "admin",
+        "vhost": "/",
+        "configure": ".*",
+        "write": ".*",
+        "read": ".*"
+      }
+    ],
+    "queues": [
+      {
+        "name": "minha-fila",
+        "vhost": "/",
+        "durable": true,
+        "auto_delete": false,
+        "arguments": {}
+      }
+    ],
+    "exchanges": [
+      {
+        "name": "minha-exchange",
+        "vhost": "/",
+        "type": "direct",
+        "durable": true,
+        "auto_delete": false,
+        "internal": false,
+        "arguments": {}
+      }
+    ],
+    "bindings": [
+      {
+        "source": "minha-exchange",
+        "vhost": "/",
+        "destination": "minha-fila",
+        "destination_type": "queue",
+        "routing_key": "minha-chave",
+        "arguments": {}
+      }
+    ]
+  }
+  

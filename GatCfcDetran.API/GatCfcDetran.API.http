@@ -1,0 +1,6 @@
+@GatCfcDetran.API_HostAddress = http://localhost:5063
+
+GET {{GatCfcDetran.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,69 @@
+
+services:
+  gatcfcdetran.api:
+    image: ${DOCKER_REGISTRY-}gatcfcdetranapi
+    build:
+      context: .
+      dockerfile: GatCfcDetran.API/Dockerfile
+    depends_on:
+      - postgres
+      - rabbitmq
+    ports:
+      - "5000:5000"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Database: "Host=postgres;Port=5432;Database=gat-dev;Username=Gat_db_admin;Password=XkGKfsxj7nDaqg5fz4YMnEqjsoaCvhF9wJjkG2x8qWqUYFiz3PSDhWfHSupfiXRb56ckGcjw2oDG5t6ZA9nkJqYmv7kxLb42wi8"
+      ConnectionStrings__Detran: ""
+      JwtTokenData__Secret: "anyInformationForHashanyInformationForHash"
+      SMTPCredentials__Host: "smtp.gmail.com"
+      SMTPCredentials__User: "preencha aqui com seu e-mail"
+      SMTPCredentials__SenhaDeApp: "preencha aqui com sua senha de app"
+      RabbitConfig__Uri: "amqps://rabbitmq:5672"
+      RabbitConfig__UserName: "admin"
+      RabbitConfig__Password: "admin"
+    command: >
+      sh -c "
+      sleep 10 &&
+      dotnet ef database update --no-build &&
+      dotnet test --no-build --logger trx &&
+      dotnet run
+      "
+  postgres:
+    image: postgres
+    container_name: postgres_cfc_detran
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: Gat_db_admin
+      POSTGRES_PASSWORD: "XkGKfsxj7nDaqg5fz4YMnEqjsoaCvhF9wJjkG2x8qWqUYFiz3PSDhWfHSupfiXRb56ckGcjw2oDG5t6ZA9nkJqYmv7kxLb42wi8"
+      POSTGRES_DB: gat-dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  sqldump:
+    image: postgres
+    depends_on:
+      - postgres
+      - gatcfcdetran.api
+    volumes:
+      - ./SqlDump.sql:/SqlDump.sql
+    entrypoint: [ "sh", "-c", "sleep 20 && PGPASSWORD=XkGKfsxj7nDaqg5fz4YMnEqjsoaCvhF9wJjkG2x8qWqUYFiz3PSDhWfHSupfiXRb56ckGcjw2oDG5t6ZA9nkJqYmv7kxLb42wi8 psql -h postgres -U Gat_db_admin -d gat-dev -f /SqlDump.sql" ]
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672" 
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+      RABBITMQ_LOAD_DEFINITIONS: /etc/rabbitmq/definitions.json
+    volumes:
+      - ./definitions.json:/etc/rabbitmq/definitions.json
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
