@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 // Importando as páginas
 import Login from '../views/LoginPage.vue'
-import Home from '../views/Home.vue' // você pode criar esse depois, ou mudar se quiser
+import Home from '../views/Home.vue' 
 
 const routes = [
   {

@@ -15,6 +15,7 @@ using GatCfcDetran.Services.Interface;
 using GatCfcDetran.Services.Services;
 using RabbitMQ.Client;
 using GatCfcDetran.Services.ExternServices;
+using GatCfcDetran.Services.BackgroundServices;
 
 namespace GatCfcDetran.IoC.Config
 {
@@ -62,6 +63,9 @@ namespace GatCfcDetran.IoC.Config
             services.AddScoped<IScheduleService, ScheduleService>();
             services.AddScoped<ICfcServices, CfcServices>();
             services.AddSingleton<IRabbitService, RabbitService>();
+            services.AddSingleton<IEmailService, EmailService>();
+
+            services.AddHostedService<EmailBackgroundService>();
 
             return services;
         }

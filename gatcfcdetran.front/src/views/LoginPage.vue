@@ -14,8 +14,6 @@
       </div>
 
       <button type="submit">Entrar</button>
-
-      <p class="signup-text">Ainda não tem conta? <a href="#">Cadastre-se</a></p>
     </form>
   </div>
 </template>
@@ -24,6 +22,7 @@
   import { defineComponent, ref } from 'vue'
   import { useRouter } from 'vue-router'
   import { AuthUser } from '../services/authService'
+  import { decodeJWT } from '../services/tokenUtils'
 
 
 export default defineComponent({
@@ -44,6 +43,7 @@ export default defineComponent({
 
         // Aqui você pode guardar o token, etc.
         localStorage.setItem('token', response.token)
+        localStorage.setItem('userId', decodeJWT(response.token).userId)
 
         // Redirecionar para a Home
         router.push('/home')
@@ -52,6 +52,11 @@ export default defineComponent({
         console.error('Erro no login:', error)
         alert('Falha no login. Verifique seus dados.')
       }
+    }
+
+    const handleSubscribe = () => {
+      // Redirecionar para a página de cadastro
+      router.push('/signup')
     }
 
     return {

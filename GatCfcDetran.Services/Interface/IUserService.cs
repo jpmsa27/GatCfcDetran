@@ -11,5 +11,8 @@ namespace GatCfcDetran.Services.Interface
     {
         Task<CreateUserResponseDto> CreateUser(CreateUserRequestDto requestDto, string cfcId);
         Task<CreateUserResponseDto> GetUser(string cpf);
+        Task<CreateUserResponseDto> GetUserById(string id);
+        Task<CreateUserResponseDto> CreateAdmin(CreateAdminRequestDto requestDto, string cfcId);
+        Task<List<CreateUserResponseDto>> GetUsers(string cfcId);
     }
 }

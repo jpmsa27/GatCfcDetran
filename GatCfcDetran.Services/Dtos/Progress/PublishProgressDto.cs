@@ -11,5 +11,6 @@ namespace GatCfcDetran.Services.Dtos.Progress
         public required string Nome { get; set; }
         public required string Message { get; set; }
         public required string Email { get; set; }
+        public required string Titulo { get; set; }
     }
 }

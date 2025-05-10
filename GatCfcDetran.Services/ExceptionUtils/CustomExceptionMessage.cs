@@ -13,5 +13,7 @@ namespace GatCfcDetran.Services.ExceptionUtils
         public static readonly string AlreadyExists = "Já existe um usuário cadastrado com esse CPF.";
         public static readonly string CfcNotFound = "CFC não encontrado.";
         public static readonly string ErrorOnCreate = "Erro ao criar o usuário.";
+        public static readonly string ErrorOnUpdate = "Erro ao atualizar o usuário.";
+        public static readonly string ProgressNotFound = "Progresso do usuário não encontrado.";
     }
 }

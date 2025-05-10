@@ -18,7 +18,7 @@ services:
       SMTPCredentials__Host: "smtp.gmail.com"
       SMTPCredentials__User: "preencha aqui com seu e-mail"
       SMTPCredentials__SenhaDeApp: "preencha aqui com sua senha de app"
-      RabbitConfig__Uri: "amqps://rabbitmq:5672"
+      RabbitConfig__Uri: "amqp://rabbitmq:5672"
       RabbitConfig__UserName: "admin"
       RabbitConfig__Password: "admin"
     command: >
@@ -26,8 +26,8 @@ services:
       sleep 10 &&
       dotnet ef database update --no-build &&
       dotnet test --no-build --logger trx &&
-      dotnet run
-      "
+      dotnet run"
+
   postgres:
     image: postgres
     container_name: postgres_cfc_detran
@@ -40,7 +40,6 @@ services:
       POSTGRES_DB: gat-dev
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
   sqldump:
     image: postgres
     depends_on:
@@ -65,5 +64,14 @@ services:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     restart: unless-stopped
 
+  vue-dev:
+    image: node:18
+    container_name: vue-dev
+    working_dir: /app
+    volumes:
+      - ./gatcfcdetran.front:/app
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev"
 volumes:
   postgres_data:

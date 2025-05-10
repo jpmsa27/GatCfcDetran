@@ -73,7 +73,8 @@ namespace GatCfcDetran.Services.Services
                 if(userProgressExists.AulasTotais >= userProgressExists.AulasMinimas)
                 {
                     var progressMessage = new PublishProgressDto() 
-                    { 
+                    {
+                        Titulo = "Exame Prático Disponível",
                         Email = user.Email, 
                         Message = "O usuário que recebeu essa mensagem já pode efetuar o exame prático.", 
                         Nome = user.Name 
@@ -106,6 +107,13 @@ namespace GatCfcDetran.Services.Services
                 throw new CustomException(CustomExceptionMessage.ErrorOnCreate, System.Net.HttpStatusCode.InternalServerError);
             }
 
+            await _rabbitService.PublishAsync(JsonSerializer.Serialize(new PublishProgressDto()
+            {
+                Titulo = "Exame marcado com sucesso!",
+                Email = user.Email,
+                Message = $"Seu exame foi marcado com sucesso para o dia: { requestDto.ScheduleDate }",
+                Nome = user.Name
+            }));
             return (RegisterScheduleResponseDto)schedule;
         }
     }

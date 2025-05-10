@@ -199,5 +199,45 @@ namespace GatCfcDetran.Tests.Testers
                 .WithMessage(CustomExceptionMessage.UserNotFound)
                 .Where(ex => ex.StatusCode == System.Net.HttpStatusCode.NotFound);
         }
+
+        [Fact]
+        public async Task CreateAdmin_WithValidData_ShouldCreateUser()
+        {
+            // Arrange
+            var cfc = new CfcEntity
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = _faker.Company.CompanyName(),
+                Cnpj = _faker.Company.Cnpj(),
+                Address = _faker.Address.FullAddress(),
+                Email = _faker.Internet.Email()
+            };
+
+            await _dbContext.Cfcs.AddAsync(cfc);
+            await _dbContext.SaveChangesAsync();
+
+            var requestDto = new CreateAdminRequestDto
+            {
+                Cpf = _faker.Person.Cpf(),
+                Password = _faker.Internet.Password(),
+                Name = _faker.Person.FullName,
+                Email = _faker.Internet.Email(),
+                BirthDate = _faker.Date.Past(20)
+            };
+
+            // Act
+            var response = await _userService.CreateAdmin(requestDto, cfc.Id);
+
+            // Assert
+            response.Should().NotBeNull();
+            response.Cpf.Should().Be(requestDto.Cpf);
+            response.Email.Should().Be(requestDto.Email);
+            response.Name.Should().Be(requestDto.Name);
+            response.BirthDate.Date.Should().Be(requestDto.BirthDate.Date);
+
+            var userInDb = await _dbContext.Users.FirstOrDefaultAsync(u => u.Cpf == requestDto.Cpf);
+            userInDb.Should().NotBeNull();
+            userInDb!.CfcId.Should().Be(cfc.Id);
+        }
     }
 }

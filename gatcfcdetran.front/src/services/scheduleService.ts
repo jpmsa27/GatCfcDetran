@@ -15,6 +15,11 @@ export async function GetSchedules() {
   return response.data
 }
 
+export async function GetSchedulesByCpf(cpf: string) {
+  const response = await api.get(`/api/Schedules/${cpf}`)
+  return response.data
+}
+
 export async function GetSchedule(cnpj: string) {
   const response = await api.get(`/api/Schedules/${cnpj}`)
   return response.data
