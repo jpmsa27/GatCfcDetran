@@ -98,3 +98,8 @@ Disponibilizado também um arquivo `.json` do Postman para facilitar testes manu
 
 ### Tela do Usuário
 ![image](https://github.com/user-attachments/assets/b8e037e4-0342-44d3-aa9a-5ec1320f562b)
+
+### O e-mail enviado pelo sistema na caixa de entrada 
+![image](https://github.com/user-attachments/assets/559bc4ac-597c-4696-bc0e-4c1f9a04f206)
+
+ 
