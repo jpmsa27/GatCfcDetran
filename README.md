@@ -85,7 +85,7 @@ Disponibilizado também um arquivo `.json` do Postman para facilitar testes manu
 
 - Dados do User, marcação de exame e progresso
 
-![image](https://github.com/user-attachments/assets/5cea35a4-db04-4f1d-a235-f638001f05ee)
+![442466912-5cea35a4-db04-4f1d-a235-f638001f05ee](https://github.com/user-attachments/assets/a57983b0-4d40-4bd7-804a-d808da3f1e27)
 
 ![image](https://github.com/user-attachments/assets/7f61a274-05e4-4f55-a214-422d4ec70a32)
 
